@@ -1,4 +1,8 @@
-﻿Public Class People
+﻿Imports System.ComponentModel
+
+Public Class People
+    Implements INotifyPropertyChanged
+
     Private _fullName As String
     Private _dob As Date
     Private _gender As GenderEnum
@@ -8,6 +12,8 @@
         MALE
         FEMALE
     End Enum
+
+    Public Event PropertyChanged(ByVal sender As Object, ByVal e As System.ComponentModel.PropertyChangedEventArgs) Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
 
     Public Property FullName() As String
         Get
@@ -36,11 +42,40 @@
         End Set
     End Property
 
+    Public Property GenderIsUnknown() As Boolean
+        Get
+            Return _gender = GenderEnum.Unknown
+        End Get
+        Set(ByVal value As Boolean)
+            If value Then _gender = GenderEnum.Unknown
+        End Set
+    End Property
+
+    Public Property GenderIsMale() As Boolean
+        Get
+            Return _gender = GenderEnum.Male
+        End Get
+        Set(ByVal value As Boolean)
+            If value Then _gender = GenderEnum.Male
+        End Set
+    End Property
+
+    Public Property GenderIsFemale() As Boolean
+        Get
+            Return _gender = GenderEnum.Female
+        End Get
+        Set(ByVal value As Boolean)
+            If value Then _gender = GenderEnum.Female
+        End Set
+    End Property
+
     Public Function Query(ByVal PID As Long) As Boolean
         ' Mock query data
         _fullName = "สมชาย แซ่ตั้ง"
         _dob = New Date(2510 - 543, 8, 13)
         _gender = GenderEnum.MALE
+
+        RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(Nothing))
 
         Return True
     End Function

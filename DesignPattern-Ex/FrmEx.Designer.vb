@@ -22,6 +22,7 @@ Partial Class FrmEx
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container
         Me.Label1 = New System.Windows.Forms.Label
         Me.LblFullName = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
@@ -32,6 +33,8 @@ Partial Class FrmEx
         Me.RdoGenderFemale = New System.Windows.Forms.RadioButton
         Me.BtnQuery = New System.Windows.Forms.Button
         Me.BtnUpdate = New System.Windows.Forms.Button
+        Me.PeopleBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        CType(Me.PeopleBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -48,6 +51,7 @@ Partial Class FrmEx
         '
         Me.LblFullName.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblFullName.AutoSize = True
+        Me.LblFullName.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PeopleBindingSource, "FullName", True))
         Me.LblFullName.Enabled = False
         Me.LblFullName.Location = New System.Drawing.Point(109, 34)
         Me.LblFullName.Name = "LblFullName"
@@ -68,6 +72,7 @@ Partial Class FrmEx
         'DtpDOB
         '
         Me.DtpDOB.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.DtpDOB.DataBindings.Add(New System.Windows.Forms.Binding("Value", Me.PeopleBindingSource, "DOB", True))
         Me.DtpDOB.Enabled = False
         Me.DtpDOB.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.DtpDOB.Location = New System.Drawing.Point(112, 53)
@@ -89,6 +94,7 @@ Partial Class FrmEx
         '
         Me.RdoGenderUnknown.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.RdoGenderUnknown.AutoSize = True
+        Me.RdoGenderUnknown.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PeopleBindingSource, "GenderIsUnknown", True))
         Me.RdoGenderUnknown.Enabled = False
         Me.RdoGenderUnknown.Location = New System.Drawing.Point(112, 82)
         Me.RdoGenderUnknown.Name = "RdoGenderUnknown"
@@ -102,6 +108,7 @@ Partial Class FrmEx
         '
         Me.RdoGenderMale.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.RdoGenderMale.AutoSize = True
+        Me.RdoGenderMale.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PeopleBindingSource, "GenderIsMale", True))
         Me.RdoGenderMale.Enabled = False
         Me.RdoGenderMale.Location = New System.Drawing.Point(112, 108)
         Me.RdoGenderMale.Name = "RdoGenderMale"
@@ -115,6 +122,7 @@ Partial Class FrmEx
         '
         Me.RdoGenderFemale.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.RdoGenderFemale.AutoSize = True
+        Me.RdoGenderFemale.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PeopleBindingSource, "GenderIsFemale", True))
         Me.RdoGenderFemale.Enabled = False
         Me.RdoGenderFemale.Location = New System.Drawing.Point(112, 134)
         Me.RdoGenderFemale.Name = "RdoGenderFemale"
@@ -145,6 +153,10 @@ Partial Class FrmEx
         Me.BtnUpdate.Text = "Update"
         Me.BtnUpdate.UseVisualStyleBackColor = True
         '
+        'PeopleBindingSource
+        '
+        Me.PeopleBindingSource.DataSource = GetType(DesignPattern_Ex.People)
+        '
         'FrmEx
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -164,6 +176,7 @@ Partial Class FrmEx
         Me.Name = "FrmEx"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Design Pattern"
+        CType(Me.PeopleBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -178,5 +191,6 @@ Partial Class FrmEx
     Friend WithEvents RdoGenderFemale As System.Windows.Forms.RadioButton
     Friend WithEvents BtnQuery As System.Windows.Forms.Button
     Friend WithEvents BtnUpdate As System.Windows.Forms.Button
+    Friend WithEvents PeopleBindingSource As System.Windows.Forms.BindingSource
 
 End Class
